@@ -10,6 +10,7 @@ var http = require('http');
 var path = require('path');
 
 //custom imports-----------
+var data = require('./routes/data');  //the data file for loading the data
 
 
 var app = express();
@@ -36,7 +37,7 @@ app.get('/', routes.index);
 app.get('/users', user.list);
 
 /*******custom routes****************/
-app.get('/import', routes.load); 
+app.get('/import', data.load); 
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
