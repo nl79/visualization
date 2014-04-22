@@ -11,7 +11,8 @@ var path = require('path');
 
 //custom imports-----------
 var data = require('./routes/data');  //the data file for loading the data
-
+//get the database connection.
+var mongoose = require('mongoose'); //mongo db api. 
 
 var app = express();
 
@@ -37,7 +38,8 @@ app.get('/', routes.index);
 app.get('/users', user.list);
 
 /*******custom routes****************/
-app.get('/import', data.load); 
+app.get('/import', data.load);
+app.post('/load', routes.load); 
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

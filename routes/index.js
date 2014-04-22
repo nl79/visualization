@@ -3,7 +3,10 @@
  * GET home page.
  */
 //load the database connection
-require("../lib/utils.js"); 
+var utilities = require("../lib/utils.js");
+
+//get the mongoose object. 
+var mongoose = require('mongoose'); //mongo db api. 
 
 exports.index = function(req, res){
   
@@ -11,5 +14,17 @@ exports.index = function(req, res){
 };
 
 exports.load = function (req, res) {
-  console.log('loading'); 
+    var conn = utilities.utils.getDBConn();
+    
+    conn.use('data'); 
+    
+    
+    
+    console.log(req.route.method);
+    
+    console.log(req.body);
+    res.write("return"); 
+    res.end(); 
 }
+
+

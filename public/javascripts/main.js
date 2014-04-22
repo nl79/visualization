@@ -3,14 +3,13 @@
 
 
 function getInitialData() {
-    alert("here");
     //ajax call to get the initial data.
     $.ajax({
         type: "POST",
         url: "/load",
         data: { name: "John", location: "Boston" },
-        success: function () {
-            alert("completel"); 
+        success: function (result) {
+            alert(result); 
         }
     });
 }
