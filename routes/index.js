@@ -30,13 +30,15 @@ exports.index = function(req, res){
 exports.list = function (req, res) {
   // http://mongodb.github.io/node-mongodb-native/api-generated/mongoclient.html
   // http://blog.ksetyadi.com/2011/10/nodejs-and-mongodb-a-beginners-approach/
-/*
+
+  
+  /*
   var MongoClient = require('mongodb').MongoClient
   var format = require('util').format;
-  
+
   MongoClient.connect('mongodb://127.0.0.1:27017/is217', function(err, db) {
     if(err) throw err;
-  
+    
     var collection = db.collection('data');
    
     collection.count(function(err, count) {
@@ -51,13 +53,15 @@ exports.list = function (req, res) {
       // Let's close the db
       db.close();
     });
+  
    
   })
-  
   */
-  var mongo = require('mongodb'),
-  Server = mongo.server,
-  Db = mongo.Server; 
+
+  /*
+  var mongo = require('mongodb'); 
+  var Server = mongo.Server; 
+  var Db = mongo.Db; 
   
   var server = new Server('localhost', 27017, {auto_reconnect: true});
   var db = new Db('is217', server);
@@ -67,9 +71,27 @@ exports.list = function (req, res) {
     callback(err);
   };
   
+  */
   
-    console.log(results); 
+  var monk = require('monk');
+  var db = monk('localhost:27017/is217');
+  var collection = db.get('data'); 
+  
+  //console.log(collection);
+  
+  collection.count(function(err, count) {
+    console.log("here"); 
+      console.log("count" +count);
+    });
+  
+  // Locate all the entries using find
+    collection.find({}, function (e, rec){
+      console.log(req); 
+      //console.log(rec); 
+    });
+  //console.log(collection.find({}).count());
     
+
     console.log(req.route.method);
     
     console.log(req.body);
