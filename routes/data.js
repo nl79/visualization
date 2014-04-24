@@ -1,3 +1,7 @@
+//require the mongo
+
+var MongoClient = require('mongodb').MongoClient;
+
 exports.index = function(req, res){
   res.render('index', { title: 'Express' });
 };
@@ -36,4 +40,4 @@ exports.load = function(req, res) {
   console.log("finished"); 
   
   res.render('index', { title: "Import Successful"}); 
-}; 
+};

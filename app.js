@@ -39,7 +39,7 @@ app.get('/users', user.list);
 
 /*******custom routes****************/
 app.get('/import', data.load);
-app.post('/load', routes.load); 
+app.post('/load', routes.list); 
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
