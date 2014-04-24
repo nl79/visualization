@@ -26,13 +26,8 @@ exports.index = function(req, res){
 };
 
 
-
 exports.list = function (req, res) {
-  // http://mongodb.github.io/node-mongodb-native/api-generated/mongoclient.html
-  // http://blog.ksetyadi.com/2011/10/nodejs-and-mongodb-a-beginners-approach/
-
   
-  /*
   var MongoClient = require('mongodb').MongoClient
   var format = require('util').format;
 
@@ -40,63 +35,35 @@ exports.list = function (req, res) {
     if(err) throw err;
     
     var collection = db.collection('data');
+    
+    var fields = {
+      'id': 1,
+      'name': 1
+    }
+    
+    var options = {
+      'sort': 'name',
+      'limit': 50,
+      'skip': 50
+    }
    
-    collection.count(function(err, count) {
-      console.log(format("count = %s", count));
-    });
-
     // Locate all the entries using find
-    collection.find().toArray(function(err, results) {
+    collection.find({}, fields, options).toArray(function(err, results) {
       
+      res.json(JSON.stringify(results));
       
       console.dir(results);
       // Let's close the db
       db.close();
     });
   
-   
   })
-  */
+  
+}
 
-  /*
-  var mongo = require('mongodb'); 
-  var Server = mongo.Server; 
-  var Db = mongo.Db; 
+//load the next set of results. 
+exports.next = function (req, res) {
   
-  var server = new Server('localhost', 27017, {auto_reconnect: true});
-  var db = new Db('is217', server);
-  
-  var onErr = function(err, callback){
-    db.close();
-    callback(err);
-  };
-  
-  */
-  
-  var monk = require('monk');
-  var db = monk('localhost:27017/is217');
-  var collection = db.get('data'); 
-  
-  //console.log(collection);
-  
-  collection.count(function(err, count) {
-    console.log("here"); 
-      console.log("count" +count);
-    });
-  
-  // Locate all the entries using find
-    collection.find({}, function (e, rec){
-      console.log(req); 
-      //console.log(rec); 
-    });
-  //console.log(collection.find({}).count());
-    
-
-    console.log(req.route.method);
-    
-    console.log(req.body);
-    res.write("return"); 
-    res.end(); 
 }
 
 

@@ -4,3 +4,9 @@ block content
   h1= title
   p Welcome to #{title}
   
+  div#divList
+    label(for='txtSearch') Find School
+    br
+    input(id='txtSearch', class='txtSearch' type='text')
+    input(id='btnSearch', class='btnSearch' type='button')
+    ul(id='ulList')

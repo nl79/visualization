@@ -1,0 +1,101 @@
+
+/*
+exports.list = function (req, res) {
+  // http://mongodb.github.io/node-mongodb-native/api-generated/mongoclient.html
+  // http://blog.ksetyadi.com/2011/10/nodejs-and-mongodb-a-beginners-approach/
+
+  
+  /*
+  var MongoClient = require('mongodb').MongoClient
+  var format = require('util').format;
+
+  MongoClient.connect('mongodb://127.0.0.1:27017/is217', function(err, db) {
+    if(err) throw err;
+    
+    var collection = db.collection('data');
+   
+    collection.count(function(err, count) {
+      console.log(format("count = %s", count));
+    });
+
+    // Locate all the entries using find
+    collection.find().toArray(function(err, results) {
+      
+      
+      console.dir(results);
+      // Let's close the db
+      db.close();
+    });
+  
+   
+  })
+  */
+
+  /*
+  var mongo = require('mongodb'); 
+  var Server = mongo.Server; 
+  var Db = mongo.Db; 
+  
+  var server = new Server('localhost', 27017, {auto_reconnect: true});
+  var db = new Db('is217', server);
+  
+  var onErr = function(err, callback){
+    db.close();
+    callback(err);
+  };
+  
+  */
+  
+  var monk = require('monk');
+  var db = monk('localhost:27017/is217');
+  var collection = db.get('data'); 
+  
+  //console.log(collection);
+  
+  /*
+  // Locate all the entries using find
+    collection.find({id:100654}, function (e, rec){
+      console.log(rec); 
+      //console.log(rec); 
+    });
+    */
+  
+  //query options
+  var options = {
+    "sort": "name"
+  }
+  var fields = {
+    'id': 1,
+    'name': 1
+  }
+  
+  
+  var result = collection.find({},{"id": 1, "name": 1}); 
+  console.log(result); 
+  
+    //console.log(list); 
+    //res.send(list);
+    //res.end();  
+  
+  /*
+    var result = collection.find({})
+  
+    result.each(function(item){
+      //console.log(JSON.stringify(item));
+      //send the header. 
+      //res.writeHead(200, {'Content-Type': 'application/json'});
+      //res.json(item);
+      //console.log(item); 
+      output += JSON.stringify(item);
+     
+      
+      });
+      */
+    
+    //console.log(req.route.method);
+    
+    //console.log(req.body);
+    //res.write("return"); 
+    //res.end(); 
+}
+*/
