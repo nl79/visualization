@@ -29,8 +29,8 @@ exports.index = function(req, res){
 
 exports.list = function (req, res) {
   // http://mongodb.github.io/node-mongodb-native/api-generated/mongoclient.html
-  var output = null; 
-
+  // http://blog.ksetyadi.com/2011/10/nodejs-and-mongodb-a-beginners-approach/
+/*
   var MongoClient = require('mongodb').MongoClient
   var format = require('util').format;
   
@@ -54,9 +54,20 @@ exports.list = function (req, res) {
    
   })
   
-  var conn = MongoClient.connection; 
+  */
+  var mongo = require('mongodb'),
+  Server = mongo.server,
+  Db = mongo.Server; 
   
- 
+  var server = new Server('localhost', 27017, {auto_reconnect: true});
+  var db = new Db('is217', server);
+  
+  var onErr = function(err, callback){
+    db.close();
+    callback(err);
+  };
+  
+  
     console.log(results); 
     
     console.log(req.route.method);
