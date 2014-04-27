@@ -19,6 +19,8 @@ require('../models/record');
 var data = mongoose.model('Record'); 
 */
 
+ var MongoClient = require('mongodb').MongoClient
+  var format = require('util').format;
 
 exports.index = function(req, res){
   
@@ -28,14 +30,15 @@ exports.index = function(req, res){
 
 exports.list = function (req, res) {
   
-  var MongoClient = require('mongodb').MongoClient
-  var format = require('util').format;
-
   MongoClient.connect('mongodb://127.0.0.1:27017/is217', function(err, db) {
     if(err) throw err;
     
     var collection = db.collection('data');
     
+    var query = {
+      'name': new RegExp('^' + req.body.name)
+    }
+    console.log(query); 
     var fields = {
       'id': 1,
       'name': 1
@@ -43,27 +46,51 @@ exports.list = function (req, res) {
     
     var options = {
       'sort': 'name',
-      'limit': 50,
-      'skip': 50
     }
    
     // Locate all the entries using find
-    collection.find({}, fields, options).toArray(function(err, results) {
+    collection.find(query, fields, options).toArray(function(err, results) {
       
       res.json(JSON.stringify(results));
       
-      console.dir(results);
+      //console.dir(results);
       // Let's close the db
       db.close();
     });
-  
   })
-  
 }
 
 //load the next set of results. 
-exports.next = function (req, res) {
-  
+exports.load = function (req, res) {
+
+  MongoClient.connect('mongodb://127.0.0.1:27017/is217', function(err, db) {
+    if(err) throw err;
+    
+    var collection = db.collection('data');
+    console.log(req.body); 
+    
+    var fields = {};
+    var options = {}; 
+   /*
+    var fields = {
+      'id': 1,
+      'name': 1
+    }
+    
+    var options = {
+      'sort': 'name',
+    }
+   */
+    // Locate all the entries using find
+    collection.find(req.body, fields, options).toArray(function(err, results) {
+      
+      res.json(JSON.stringify(results));
+      
+      //console.dir(results);
+      // Let's close the db
+      db.close();
+    });
+  })
 }
 
 

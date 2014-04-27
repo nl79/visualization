@@ -1,0 +1,10 @@
+#ulAlphaList li {
+    list-style: none;
+    display: inline;
+    margin: 0px 10px; 
+}
+
+#divList {
+    width: 300px;
+    border: 1px solid red;
+}
