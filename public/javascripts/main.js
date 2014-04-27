@@ -44,7 +44,24 @@ function displayData(json) {
     //parse the json string
     var obj = JSON.parse(json);
     
-    console.log(obj); 
+    var obj = obj.pop();
+    var data = new Array(); 
+  
+    for (var key in obj ) {
+        if (obj.hasOwnProperty(key)) {
+            data.push(obj[key]);        
+        }
+    }
+    
+    var chart = d3.select("#divChart");
+    var bar = chart.selectAll("div");
+    var barUpdate = bar.data(data);
+    var barEnter = barUpdate.enter().append("div");
+    barEnter.style("width", function(d) {return d / 100 + "px"; });
+    barEnter.text(function(d) { return d; }); 
+    
+    
+    
 }
 
 //initize the alphabet

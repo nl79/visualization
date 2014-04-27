@@ -1,10 +1,35 @@
+
+li:hover {
+    cursor: pointer;
+    color: red;
+    text-decoration: underline; 
+
+}
 #ulAlphaList li {
     list-style: none;
     display: inline;
-    margin: 0px 10px; 
+    margin: 0px 10px;
+    font-size: 125%; 
+}
+
+#divChart {
+    width: 700px;
+    border: 1px solid black;
+    margin-left: 310px;
+    
+    font: 10px sans-serif;
+    background-color: steelblue;
+    text-align: right;
+    padding: 3px;
+    color: white;
 }
 
 #divList {
+    float: left; 
     width: 300px;
     border: 1px solid red;
+}
+#divList li {
+    list-style: none; 
+    padding: 2px; 
 }
