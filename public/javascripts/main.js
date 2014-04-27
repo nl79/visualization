@@ -24,7 +24,6 @@ function updateList(json) {
 }
 
 function schoolClick(evt) {
-    console.log(evt.target.id); 
     
     var id = evt.target.id; 
     
@@ -45,20 +44,52 @@ function displayData(json) {
     var obj = JSON.parse(json);
     
     var obj = obj.pop();
-    var data = new Array(); 
-  
+    var data = new Array();
+    var objArray = new Array(); 
+
     for (var key in obj ) {
         if (obj.hasOwnProperty(key)) {
+
+            if (isNaN(obj[key]) || key == 'id') {
+                continue; 
+            }
+            dataObj = {}; 
+            dataObj['key'] = key; 
+            dataObj['val'] = obj[key];
+            objArray.push(dataObj);
+            
             data.push(obj[key]);        
         }
     }
     
+    console.log(dataObj);
+    
+    $("#divChart").empty(); 
+    
+    
+    var x = d3.scale.linear()
+    .domain([0, d3.max(data)])
+    .range([0, 650]);
+    
     var chart = d3.select("#divChart");
     var bar = chart.selectAll("div");
-    var barUpdate = bar.data(data);
+    //var barUpdate = bar.data(data);
+    var barUpdate = bar.data(objArray);
+    
     var barEnter = barUpdate.enter().append("div");
-    barEnter.style("width", function(d) {return d / 100 + "px"; });
-    barEnter.text(function(d) { return d; }); 
+    //barEnter.style("width", function(d) { return d / 100 + "px"; });
+    barEnter.style("width", function(d) {
+        return x(d.val) + "px";
+    });
+    
+    barEnter.style("background-color", "red");
+    barEnter.style("margin", "2px");
+    barEnter.style("padding", "5px");
+    
+    barEnter.text(function(d) {
+        var txt = d.key + d.val; 
+        return txt;
+    }); 
     
     
     
