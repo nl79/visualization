@@ -34,6 +34,16 @@ function updateList(json) {
 }
 
 function schoolClick(evt) {
+     
+    //get the currently active LI and remove the active class
+    var curr = document.getElementById("inputActiveItem").value;
+
+    if(curr !== "") {
+        document.getElementById(curr).setAttribute('class', '');
+    }
+    //set the selected items class. 
+    document.getElementById("inputActiveItem").value = evt.target.id;
+    evt.target.setAttribute("class", "active");
     
     var id = evt.target.id; 
     
