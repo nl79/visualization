@@ -1,3 +1,13 @@
+function formatMoney(num, decPlaces, thouSeparator, decSeparator) {
+    var n = num,
+    decPlaces = isNaN(decPlaces = Math.abs(decPlaces)) ? 2 : decPlaces,
+    decSeparator = decSeparator == undefined ? "." : decSeparator,
+    thouSeparator = thouSeparator == undefined ? "," : thouSeparator,
+    sign = n < 0 ? "-" : "",
+    i = parseInt(n = Math.abs(+n || 0).toFixed(decPlaces)) + "",
+    j = (j = i.length) > 3 ? j % 3 : 0;
+    return sign + (j ? i.substr(0, j) + thouSeparator : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thouSeparator) + (decPlaces ? decSeparator + Math.abs(n - i).toFixed(decPlaces).slice(2) : "");
+};
 
 
 function updateList(json) {
@@ -62,15 +72,12 @@ function displayData(json) {
         }
     }
     
-    console.log(dataObj);
-    
     $("#divChart").empty(); 
-    
     
     var x = d3.scale.linear()
     .domain([0, d3.max(data)])
     .range([0, 650]);
-    
+     
     var chart = d3.select("#divChart");
     var bar = chart.selectAll("div");
     //var barUpdate = bar.data(data);
@@ -79,17 +86,27 @@ function displayData(json) {
     var barEnter = barUpdate.enter().append("div");
     //barEnter.style("width", function(d) { return d / 100 + "px"; });
     barEnter.style("width", function(d) {
-        return x(d.val) + "px";
+        //return x(d.val) + "px";
+        return d.val/100 + "px"; 
     });
-    
-    barEnter.style("background-color", "#FF3300");
+    barEnter.style("height", "45px"); 
+    barEnter.style("background-color", "#2D4066");
     barEnter.style("margin", "2px");
-    barEnter.style("padding", "5px");
+    barEnter.style("padding", "20px 20px 0px 0px");
+    barEnter.style("font-size", "120%");
+    barEnter.style("border-radius", "15px");
     
     barEnter.text(function(d) {
+        //if the value si empty, return an empty string
+        if (d.val == "") {
+            return ""; 
+        }
         var label = d.key.split('_').join(" ");
-        var label = ucwords(label); 
-        var txt =  label + "                "+ d.val; 
+        var label = ucwords(label);
+        var value = formatMoney(d.val,2,',','.');
+        
+        //var txt =  label + " "+ d.val;
+        var txt = label + ": " + "$" + value; 
         return txt;
     }); 
     
@@ -107,7 +124,7 @@ function ucwords(str) {
         output += ucfirst(parts[i]) + " "; 
     }
     
-    return output; 
+    return output.trim(); 
 }
 
 //initize the alphabet

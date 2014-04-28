@@ -18,7 +18,8 @@ li:hover {
     margin-left: 310px;
     
     font: 10px sans-serif;
-    background-color: steelblue;
+    /* background-color: steelblue; */
+    background-color: #EEEEEE; 
     text-align: right;
     padding: 3px;
     color: white;
@@ -27,7 +28,8 @@ li:hover {
 #divList {
     float: left; 
     width: 300px;
-    border: 1px solid red;
+    height: 700px;
+    overflow-y: scroll; 
 }
 #divList li {
     list-style: none; 
