@@ -82,17 +82,32 @@ function displayData(json) {
         return x(d.val) + "px";
     });
     
-    barEnter.style("background-color", "red");
+    barEnter.style("background-color", "#FF3300");
     barEnter.style("margin", "2px");
     barEnter.style("padding", "5px");
     
     barEnter.text(function(d) {
-        var txt = d.key + d.val; 
+        var label = d.key.split('_').join(" ");
+        var label = ucwords(label); 
+        var txt =  label + "                "+ d.val; 
         return txt;
     }); 
     
     
     
+}
+
+function ucfirst(str) {
+    return str.charAt(0).toUpperCase() + str.substr(1); 
+}
+function ucwords(str) {
+    var output = ""; 
+    var parts = str.split(" ");
+    for(var i = 0; i < parts.length; i++) {
+        output += ucfirst(parts[i]) + " "; 
+    }
+    
+    return output; 
 }
 
 //initize the alphabet
