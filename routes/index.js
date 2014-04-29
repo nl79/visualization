@@ -2,24 +2,9 @@
 /*
  * GET home page.
  */
-
-//var utilities = require("../lib/utils");
-
-/*
-//get the mongoose object. 
-var mongoose = require('mongoose'); //mongo db api.
-
-//connec to the database
-mongoose.connect('mongodb://localhost/');
-
-//require the record model 
-require('../models/record');
-
-//get the data collection
-var data = mongoose.model('Record'); 
-*/
-
- var MongoClient = require('mongodb').MongoClient
+  //import the mongo db. 
+  var MongoClient = require('mongodb').MongoClient
+  //import the format utility
   var format = require('util').format;
 
 exports.index = function(req, res){
