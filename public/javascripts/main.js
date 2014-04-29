@@ -107,11 +107,11 @@ function displayData(json) {
         //return x(d.val) + "px";
         return d.val/100 + "px"; 
     });
-    barEnter.style("height", "45px"); 
+    barEnter.style("height", "50px"); 
     barEnter.style("background-color", "#2D4066");
     barEnter.style("margin", "2px");
-    barEnter.style("padding", "20px 20px 0px 0px");
-    barEnter.style("font-size", "120%");
+    barEnter.style("padding", "10px 10px 0px 0px");
+    barEnter.style("font-size", "115%");
     barEnter.style("border-radius", "15px");
     
     barEnter.text(function(d) {
