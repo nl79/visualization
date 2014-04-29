@@ -132,9 +132,11 @@ function displayData(json) {
     
 }
 
+//uppercase the first letter. 
 function ucfirst(str) {
     return str.charAt(0).toUpperCase() + str.substr(1); 
 }
+//uppsercase the first letter of each word. 
 function ucwords(str) {
     var output = ""; 
     var parts = str.split(" ");
@@ -216,6 +218,10 @@ $( document ).ready(function() {
         } else {
                 $(this).data('timer', setTimeout(search, 500));
         }
+    });
+    
+    $("#txtSearch").on("click", function(e) {
+        this.select(); 
     }); 
      
      
