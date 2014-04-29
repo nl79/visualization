@@ -172,6 +172,18 @@ function loadList(ch) {
     });
 }
 
+//seach for a school name
+function search() {
+    //get the vaue from the search box.
+    var qString = document.getElementById("txtSearch").value;
+    
+    //if the query string is empty, set it to the letter a
+    qString = qString == "" ? 'a' : qString;
+    
+    //call the load list method
+    loadList(qString); 
+}
+
 
 function letterClick(evt) {
     // call the load list method and pass the clicked letter.
@@ -179,6 +191,7 @@ function letterClick(evt) {
   
     if (ch != null) { loadList(ch); }
 }
+
 
 $( document ).ready(function() {
      //load the initial data into the ul
@@ -191,6 +204,19 @@ $( document ).ready(function() {
 
      //wire the events
      $("#ulList").on("click", schoolClick);
+     
+     $("#txtSearch").on("keyup",function(e){
+
+        //clear the existing timer.
+        clearTimeout($.data(this, 'timer'));
+        //if the users clicks the return key, search immediately.
+        //else set a 500 delay.
+        if(e.keyCode == 13) {
+                search();
+        } else {
+                $(this).data('timer', setTimeout(search, 500));
+        }
+    }); 
      
      
  });

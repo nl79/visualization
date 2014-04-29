@@ -12,8 +12,20 @@ li:hover {
     font-size: 125%; 
 }
 
+#divSearch {
+    width: 300px;
+    float: left; 
+    text-align: center;
+    padding-top: 15px;
+    padding-left: 10px; 
+}
+#txtSearch {
+   
+}
+
 #hSchoolName {
-    margin-left: 310px; 
+    margin-left: 310px;
+    
     
 }
 

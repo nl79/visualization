@@ -35,15 +35,18 @@ exports.list = function (req, res) {
     
     var collection = db.collection('data');
     
+    //build a regular expression search query. 
     var query = {
-      'name': new RegExp('^' + req.body.name)
+      'name': new RegExp('^' + req.body.name, 'i')
     }
-    console.log(query); 
+    
+    //limit the display fields 
     var fields = {
       'id': 1,
       'name': 1
     }
     
+    //set the options to sort by name. 
     var options = {
       'sort': 'name',
     }
@@ -67,20 +70,10 @@ exports.load = function (req, res) {
     if(err) throw err;
     
     var collection = db.collection('data');
-    console.log(req.body); 
-    
+ 
     var fields = {};
     var options = {}; 
-   /*
-    var fields = {
-      'id': 1,
-      'name': 1
-    }
-    
-    var options = {
-      'sort': 'name',
-    }
-   */
+   
     // Locate all the entries using find
     collection.find(req.body, fields, options).toArray(function(err, results) {
       
