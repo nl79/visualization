@@ -16,11 +16,11 @@ li:hover {
     width: 300px;
     float: left; 
     text-align: center;
-    padding-top: 15px;
+    padding-top: 10px;
     padding-left: 10px; 
 }
 #txtSearch {
-   
+   width: 240px; 
 }
 
 #hSchoolName {

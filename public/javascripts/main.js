@@ -178,12 +178,11 @@ function loadList(ch) {
 function search() {
     //get the vaue from the search box.
     var qString = document.getElementById("txtSearch").value;
-    
-    //if the query string is empty, set it to the letter a
-    qString = qString == "" ? 'a' : qString;
-    
-    //call the load list method
-    loadList(qString); 
+
+    if (qString != "") {
+        loadList(qString);
+    }
+     
 }
 
 
