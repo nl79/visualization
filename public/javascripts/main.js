@@ -37,9 +37,13 @@ function schoolClick(evt) {
      
     //get the currently active LI and remove the active class
     var curr = document.getElementById("inputActiveItem").value;
-
+    
     if(curr !== "") {
-        document.getElementById(curr).setAttribute('class', '');
+        var selectedLI = document.getElementById(curr);
+        //if the selected LI is no null, change its class.
+        if(selectedLI != null) {
+            selectedLI.setAttribute('class', '')
+        }
     }
     //set the selected items class. 
     document.getElementById("inputActiveItem").value = evt.target.id;
@@ -67,6 +71,9 @@ function displayData(json) {
     var data = new Array();
     var objArray = new Array(); 
 
+     //set the name of the school in the headering.
+    $("#hSchoolName").text(obj.name); 
+    
     for (var key in obj ) {
         if (obj.hasOwnProperty(key)) {
 
@@ -82,6 +89,7 @@ function displayData(json) {
         }
     }
     
+   
     $("#divChart").empty(); 
     
     var x = d3.scale.linear()

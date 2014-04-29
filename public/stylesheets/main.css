@@ -12,6 +12,11 @@ li:hover {
     font-size: 125%; 
 }
 
+#hSchoolName {
+    margin-left: 310px; 
+    
+}
+
 #divChart {
     width: 700px;
     border: 1px solid black;
