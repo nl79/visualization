@@ -38,6 +38,6 @@ exports.load = function(req, res) {
 });
   
   console.log("finished"); 
-  
+  res.redirect('/'); 
   res.render('index', { title: "Import Successful"}); 
 };
